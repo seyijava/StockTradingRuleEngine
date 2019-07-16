@@ -1,0 +1,33 @@
+syntax = "proto3";
+enum TradeType
+{
+	   BUY = 0;
+	   SELL = 1;
+}
+message TradeRule
+{
+    string acctNumber=1;
+    string symbol = 2;
+    double sellPrice = 3;
+    double buyPrice = 4;
+    int64 sellQuantity = 5;
+    int64 buyQuantity =6;
+    int32 tradeType = 7;
+}
+message TradeRuleRequest
+{
+    TradeRule tradeRule = 1;
+}	
+message TradeRuleResponse
+{
+     string ruleNumber = 1;
+}
+message TradeRulesResponse
+{
+     repeated TradeRule tradeRules = 1;
+}
+service TradeRuleRpcService 
+{
+  rpc submitTradeRule(TradeRuleRequest) returns (TradeRuleResponse);
+  rpc getTradeRules(TradeRulesRequest) returns (TradeRulesResponse);  
+}

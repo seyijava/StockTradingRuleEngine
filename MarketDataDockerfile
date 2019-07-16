@@ -1,0 +1,22 @@
+FROM golang AS builder
+
+COPY trade-marketdata-provider/go/trade-marketdata-provider
+
+WORKDIR trade-marketdata-provider
+
+RUN ls /go/trade-marketdata-provider
+
+ENV GO111MODULE=auto
+
+RUN go env
+
+RUN CGO_ENABLED=0 GOOS=linux go build -o trade-marketdata-provider/main.go
+
+FROM alpine:latest
+
+COPY --from=builder /go/trade-marketdata-provider ./
+
+RUN chmod +x ./trade-marketdata-provider
+
+CMD ["./trade-marketdata-provider/main.go"]
+

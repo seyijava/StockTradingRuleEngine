@@ -1,0 +1,9 @@
+{
+    "kafka": {
+        "brokerHost": "192.168.2.24:9092",
+        "topic": "MarketDataTopic",
+        "partition": 1
+    }
+   
+    
+}
